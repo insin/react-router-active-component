@@ -1,7 +1,7 @@
 # React Router Active Component
 
 A factory function for creating [React](http://facebook.github.io/react)
-omponents which get a special `className` when a specified
+components which get a special `className` when a specified
 [React Router](https://github.com/rackt/react-router) route is active, and can
 also handle creating a link to the route.
 
@@ -54,37 +54,37 @@ You can find it in the
 Creates a `ReactComponent` which takes the same props as React Router's
 [Link](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
 component to configure when it is considered active and which class it will
-be given when active, in the same way as `Link`.
+be given when active.
 
-The component's children will be wrapped in the given tag name or component - by
-default, children will be used as contents for a `Link`.
+The component's contents will be wrapped in the given tag name or component - by
+default, its children will be used as contents for a `<Link/>`.
 
 ### `component`: `String`|`ReactComponent`
 
 This can be anything that can be passed as the first argument to
-[`React.createElement()`](http://facebook.github.io/react/docs/top-level-api.html#react.createelement)
-- a tag name or a `ReactComponent` which will be used to wrap the component's
+[`React.createElement()`](http://facebook.github.io/react/docs/top-level-api.html#react.createelement) -
+a tag name or a `ReactComponent` which will be used to wrap the component's
 children.
 
 ```javascript
 var NavItem = createActiveRouteComponent('li')
 ```
 
-If a custom React component is given, the following props will be passed to it
-when rendering:
+If a custom React component is given, the following additional props will be
+passed to it when rendering:
 
-* `active` (Boolean) - `true` if the specified route is active, `false` otherwise.
-* `className` (String) - containings any `className` passed to the active
-component plus its `activeClassName`, if active.
+* `active`: `Boolean` - `true` if the specified route is active, `false` otherwise.
+* `className`: `String` - contains any `className` passed to the component plus
+  its `activeClassName`, if active.
 
-### `options`
+### `options`: `Object`
 
 An options object with the following properties:
 
 #### `link`: `Boolean` (default: `true`)
 
 If `true`, the component's `props` and `children` be used to create a `<Link/>`.
-Otherwise, its `children`` will just be wrapped in the specified `component`.
+Otherwise, its `children` will just be wrapped in the specified `component`.
 
 ```javascript
 var ActiveParagraph = createActiveRouteComponent('p', {link: false})
@@ -93,7 +93,9 @@ var ActiveParagraph = createActiveRouteComponent('p', {link: false})
 ### Component Props
 
 The component created by `createActiveRouteComponent()` takes the same props as
-React Router's `Link` component These are:
+React Router's `Link` component.
+
+These are:
 
 * `to` - a route name.
 * `params` - optional URL parameter object.
