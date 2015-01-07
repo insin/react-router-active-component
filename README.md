@@ -30,6 +30,27 @@ var NavLink = createActiveRouteComponent('li')
                                      Link Text
 ```
 
+## [Live Demo](http://insin.github.io/react-router-active-component)
+
+The demo uses:
+
+A component which creates a navigation `<li>` (including its `<a>`) which gets
+an "active" class, as required by Bootstrap's CSS.
+
+```javascript
+//
+var NavLink = createActiveRouteComponent('li')
+```
+
+A component which only gives a "special" class to a `<p>` for a specific route.
+
+```javascript
+var ActivePara = createActiveRouteComponent('p', {link: false})
+```
+```html
+<ActivePara activeClassName="special">...</ActivePar>
+```
+
 ## Install
 
 **Node**
@@ -105,64 +126,5 @@ These are:
 
 See the [Link docs](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
 for more details.
-
-## Example
-
-Live version: http://insin.github.io/react-router-active-component
-
-```javascript
-var React = require('React')
-var {DefaultRoute, Route, RouterHandler} = require('react-router')
-
-var NavItem = createActiveRouteComponent('li')
-
-var ActivePara = createActiveRouteComponent('p', {link: false})
-
-var App = React.createClass({
-  render() {
-    return <div className="App container">
-      <nav className="navbar navbar-default" role="navigation">
-        <div className="container">
-          <span className="navbar-brand">Example App</span>
-          <ul className="nav navbar-nav">
-            <NavItem to="dashboard">Dashboard</NavItem>
-            <NavItem to="mytasks">My Tasks</NavItem>
-          </ul>
-        </div>
-      </nav>
-      <RouteHandler/>
-    </div>
-  }
-})
-
-var Dashboard = React.createClass({
-  render() {
-    return <div className="Dashboard">
-      <h2>Dashboard</h2>
-      <p>I'm a regular paragraph.</p>
-      <ActivePara to="dashboard" className="special">
-        I'm a special, active paragraph.
-      </ActivePara>
-    </div>
-  }
-})
-
-var MyTasks = React.createClass({
-  render() {
-    return <div className="MyTasks">
-      <h2>My Tasks</h2>
-    </div>
-  }
-})
-
-var routes = <Route handler={App} path="/">
-  <DefaultRoute name="dashboard" handler={Dashboard}/>
-  <Route name="mytasks" path="/mytasks" handler={MyTasks}/>
-</Route>
-
-ReactRouter.run(routes, function(Handler) {
-  React.render(<Handler/>, document.body)
-})
-```
 
 ### MIT Licensed
