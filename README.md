@@ -30,7 +30,7 @@ var NavLink = createActiveRouteComponent('li')
                                      Link Text
 ```
 
-## [Live Demo](http://insin.github.io/react-router-active-component)
+## [Live Demo](http://insin.github.io/react-router-active-component) ([source](https://github.com/insin/react-router-active-component/blob/master/demo/app.jsx))
 
 The demo shows:
 
