@@ -32,24 +32,25 @@ var NavLink = createActiveRouteComponent('li')
 
 ## [Live Demo](http://insin.github.io/react-router-active-component)
 
-The demo uses:
+The demo shows:
 
-A component which creates a navigation `<li>` (including its `<a>`) which gets
-an "active" class, as required by Bootstrap's CSS.
+* A `NavLink` component which creates a navigation `<li>` (including its `<a>`)
+  which gets an `"active"` class, as required by Bootstrap's CSS.
 
-```javascript
-//
-var NavLink = createActiveRouteComponent('li')
-```
+  ```javascript
+  //
+  var NavLink = createActiveRouteComponent('li')
+  ```
 
-A component which only gives a "special" class to a `<p>` for a specific route.
+* An `ActivePara` component which creates a `<p>` which only gets a `"special"`
+  class for a specific route.
 
-```javascript
-var ActivePara = createActiveRouteComponent('p', {link: false})
-```
-```html
-<ActivePara activeClassName="special">...</ActivePar>
-```
+  ```javascript
+  var ActivePara = createActiveRouteComponent('p', {link: false})
+  ```
+  ```html
+  <ActivePara activeClassName="special">...</ActivePar>
+  ```
 
 ## Install
 
