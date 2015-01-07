@@ -2,6 +2,7 @@ dist
 demo
 src
 test
+vendor
 .gitignore
 .jshintrc
 .travis.yml
