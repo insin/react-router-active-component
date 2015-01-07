@@ -48,7 +48,7 @@ The demo shows:
   var ActivePara = createActiveRouteComponent('p', {link: false})
   ```
   ```html
-  <ActivePara activeClassName="special">...</ActivePara>
+  <ActivePara to="routename" activeClassName="special">...</ActivePara>
   ```
 
 ## Install
