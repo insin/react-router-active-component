@@ -9,7 +9,7 @@ The primary use case for this module is making it convenient to create
 components which contain a link to a route but put the active class name on the
 container rather than the link:
 
-**Using React Router <Link/>**
+**Using React Router's `Link` component:**
 
 ```html
 <ul>                           <ul>
@@ -38,7 +38,6 @@ The demo shows:
   which gets an `"active"` class, as required by Bootstrap's CSS.
 
   ```javascript
-  //
   var NavLink = createActiveRouteComponent('li')
   ```
 
