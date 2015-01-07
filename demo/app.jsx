@@ -19,6 +19,10 @@ var App = React.createClass({
         </div>
       </nav>
       <RouteHandler/>
+      <hr/>
+      <footer>
+        <a href="https://github.com/insin/react-router-active-component">Fork me on GitHub</a>
+      </footer>
     </div>
   }
 })
