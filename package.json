@@ -1,0 +1,44 @@
+{
+  "name": "react-router-active-component",
+  "description": "Factory function for React components which are active for a particular react-router route",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "standalone": "createActiveRouteComponent",
+  "homepage": "https://github.com/insin/react-router-active-component",
+  "license": "MIT",
+  "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": ">=0.12.0",
+    "react-router": ">=0.11.0"
+  },
+  "devDependencies": {
+    "browserify": "^8.0.3",
+    "browserify-shim": "^3.8.2",
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-header": "^1.2.2",
+    "gulp-jshint": "^1.9.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-react": "^2.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.0.2",
+    "gulp-util": "^3.0.1",
+    "jshint-stylish": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0"
+  },
+  "scripts": {
+    "debug": "gulp --debug",
+    "dist": "gulp bundle-js --production",
+    "watch": "gulp"
+  },
+  "browserify-shim": {
+    "react": "global:React",
+    "react-router": "global:ReactRouter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/insin/react-router-active-component.git"
+  }
+}
