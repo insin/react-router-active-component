@@ -55,7 +55,7 @@ The demo shows:
 
 **Node**
 
-React Router Active Component can be used on the server, or bundled for the
+`createActiveRouteComponent()` can be used on the server, or bundled for the
 client using an npm-compatible packaging system such as
 [Browserify](http://browserify.org/) or [webpack](http://webpack.github.io/).
 
