@@ -1,12 +1,17 @@
 {
   "name": "react-router-active-component",
   "description": "Factory function for React components which are active for a particular react-router route",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/index.js",
   "standalone": "createActiveRouteComponent",
   "homepage": "https://github.com/insin/react-router-active-component",
   "license": "MIT",
   "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
+  "keywords": [
+    "react",
+    "react-router",
+    "active"
+  ],
   "dependencies": {},
   "peerDependencies": {
     "react": ">=0.12.0",
