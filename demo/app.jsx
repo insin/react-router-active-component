@@ -15,6 +15,9 @@ var App = React.createClass({
           <ul className="nav navbar-nav">
             <NavItem to="dashboard">Dashboard</NavItem>
             <NavItem to="tasks">Tasks</NavItem>
+            <li>
+              <p className="navbar-text"><code>&lt;li&gt;</code>s in this navbar get the <code>active</code>class</p>
+            </li>
           </ul>
         </div>
       </nav>
@@ -46,6 +49,9 @@ var Tasks = React.createClass({
         <ul className="nav nav-pills nav-stacked">
           <NavItem to="all-tasks">All Tasks</NavItem>
           <NavItem to="my-tasks">My Tasks</NavItem>
+          <li>
+            <p className="navbar-text"><code>&lt;li&gt;</code>s in this nav get the <code>active</code> class</p>
+          </li>
         </ul>
       </div>
       <div className="col-md-9">
