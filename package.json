@@ -1,7 +1,7 @@
 {
   "name": "react-router-active-component",
   "description": "Factory function for React components which are active for a particular react-router route",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "main": "./lib/index.js",
   "standalone": "createActiveRouteComponent",
   "homepage": "https://github.com/insin/react-router-active-component",

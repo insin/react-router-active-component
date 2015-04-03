@@ -1,68 +1,88 @@
 /*!
- * react-router-active-component 1.0.0 - https://github.com/insin/react-router-active-component
+ * react-router-active-component 2.0.0 - https://github.com/insin/react-router-active-component
  * MIT Licensed
  */
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var o;"undefined"!=typeof window?o=window:"undefined"!=typeof global?o=global:"undefined"!=typeof self&&(o=self),o.createActiveRouteComponent=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.createActiveRouteComponent = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null)
 var assign = require('react/lib/Object.assign')
-var $__0=   (typeof window !== "undefined" ? window.ReactRouter : typeof global !== "undefined" ? global.ReactRouter : null),Link=$__0.Link,State=$__0.State
+var $__0=  (typeof window !== "undefined" ? window.ReactRouter : typeof global !== "undefined" ? global.ReactRouter : null),Link=$__0.Link
 
-function createActiveRouteComponent(component, options) {
-  if (!component) {
+var PropTypes = React.PropTypes
+
+function createActiveRouteComponent(Component, options) {
+  if (!Component) {
     throw new Error('createActiveRouteComponent() must be given a wrapper component.')
   }
-  options = assign({link: true}, options)
+
+  options = assign({
+    link: true,
+    linkClassName: ''
+  }, options)
 
   return React.createClass({
-    mixins: [State],
+    contextTypes: {
+      router: PropTypes.func.isRequired
+    },
 
     propTypes: {
-      activeClassName: React.PropTypes.string.isRequired,
-      link: React.PropTypes.bool,
-      to: React.PropTypes.string.isRequired,
-      params: React.PropTypes.object,
-      query: React.PropTypes.object,
-      onClick: React.PropTypes.func
+      activeClassName: PropTypes.string.isRequired,
+      to: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object // React Router doesn't expose Route or its custom PropType
+      ]).isRequired,
+
+      activeStyle: PropTypes.object,
+      link: PropTypes.bool,
+      linkClassName: PropTypes.string,
+      onClick: PropTypes.func,
+      params: PropTypes.object,
+      query: PropTypes.object
     },
 
     getDefaultProps:function() {
       return {
-        activeClassName: 'active'
-      , link: options.link
+        activeClassName: 'active',
+        className: '',
+        link: options.link,
+        linkClassName: options.linkClassName
       }
     },
 
+    getActiveState:function() {
+      return this.context.router.isActive(this.props.to, this.props.params, this.props.query)
+    },
+
     getClassName:function() {
-      var $__0=      this.props,className=$__0.className,activeClassName=$__0.activeClassName,to=$__0.to,params=$__0.params,query=$__0.query
-      var classNames = []
-      if (className) {
-        classNames.push(className)
+      var className = this.props.className
+      if (this.getActiveState()) {
+        className += ' ' + this.props.activeClassName
       }
-      if (this.isActive(to, params, query)) {
-        classNames.push(activeClassName)
-      }
-      return classNames.join(' ')
+      return className
     },
 
     render:function() {
       var props = assign({}, this.props, {
-        active: this.isActive(this.props.to, this.props.params, this.props.query)
-      , className: this.getClassName()
+        active: this.getActiveState(),
+        className: this.getClassName()
       })
+      if (props.activeStyle && props.active) {
+        props.style = props.activeStyle
+      }
       if (this.props.link) {
-        // Only put classNames on the container
+        // Only use active styles on the container
         var linkProps = assign({}, this.props, {
-          className: ''
-        , activeClassName: ''
+          className: this.props.linkClassName,
+          activeClassName: '',
+          activeStyle: null
         })
-        return React.createElement(component, props,
+        return React.createElement(Component, props,
           React.createElement(Link, linkProps, this.props.children)
         )
       }
       else {
-        return React.createElement(component, props, this.props.children)
+        return React.createElement(Component, props, this.props.children)
       }
     }
   })
@@ -71,7 +91,7 @@ function createActiveRouteComponent(component, options) {
 module.exports = createActiveRouteComponent
 },{"react/lib/Object.assign":2}],2:[function(require,module,exports){
 /**
- * Copyright 2014, Facebook, Inc.
+ * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -82,6 +102,8 @@ module.exports = createActiveRouteComponent
  */
 
 // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
+
+'use strict';
 
 function assign(target, sources) {
   if (target == null) {
@@ -112,7 +134,7 @@ function assign(target, sources) {
   }
 
   return to;
-};
+}
 
 module.exports = assign;
 

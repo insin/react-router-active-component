@@ -70,7 +70,9 @@ expects to find global ``React`` and ``ReactRouter`` variables to work with.
 You can find it in the
 [/dist directory](https://github.com/insin/react-router-active-component/tree/master/dist).
 
-## API: `createActiveRouteComponent(component[, options])`
+## API
+
+## `createActiveRouteComponent(component[, options])`
 
 Creates a `ReactComponent` which takes the same props as React Router's
 [Link](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
@@ -128,6 +130,7 @@ These are:
 * `params` - optional URL parameter object.
 * `query` - optional query parameters object.
 * `activeClassName` - the class name to be used when the component is active.
+* `activeStyle` - an inline style object to be used when the component is active.
 * `onClick` - a custom handler for the Link's click event.
 
 See the [Link docs](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
