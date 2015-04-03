@@ -5,7 +5,7 @@ Updated to React 0.13 and React Router 0.13.
 Added an `activeStyle` prop for the created component, as per `<Link>` in
 React Router 0.13.
 
-A `style` prop will be passed to the wrappes component when the configured route
+A `style` prop will be passed to the wrapped component when the configured route
 is active and an `activeStyle` prop has been given..
 
 Added a `linkClassName` option when creating the component and as a prop for the
