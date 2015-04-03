@@ -2,62 +2,82 @@
 
 var React = require('react')
 var assign = require('react/lib/Object.assign')
-var {Link, State} = require('react-router')
+var {Link} = require('react-router')
 
-function createActiveRouteComponent(component, options) {
-  if (!component) {
+var PropTypes = React.PropTypes
+
+function createActiveRouteComponent(Component, options) {
+  if (!Component) {
     throw new Error('createActiveRouteComponent() must be given a wrapper component.')
   }
-  options = assign({link: true}, options)
+
+  options = assign({
+    link: true,
+    linkClassName: ''
+  }, options)
 
   return React.createClass({
-    mixins: [State],
+    contextTypes: {
+      router: PropTypes.func.isRequired
+    },
 
     propTypes: {
-      activeClassName: React.PropTypes.string.isRequired,
-      link: React.PropTypes.bool,
-      to: React.PropTypes.string.isRequired,
-      params: React.PropTypes.object,
-      query: React.PropTypes.object,
-      onClick: React.PropTypes.func
+      activeClassName: PropTypes.string.isRequired,
+      to: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object // React Router doesn't expose Route or its custom PropType
+      ]).isRequired,
+
+      activeStyle: PropTypes.object,
+      link: PropTypes.bool,
+      linkClassName: PropTypes.string,
+      onClick: PropTypes.func,
+      params: PropTypes.object,
+      query: PropTypes.object
     },
 
     getDefaultProps() {
       return {
-        activeClassName: 'active'
-      , link: options.link
+        activeClassName: 'active',
+        className: '',
+        link: options.link,
+        linkClassName: options.linkClassName
       }
     },
 
+    getActiveState() {
+      return this.context.router.isActive(this.props.to, this.props.params, this.props.query)
+    },
+
     getClassName() {
-      var {className, activeClassName, to, params, query} = this.props
-      var classNames = []
-      if (className) {
-        classNames.push(className)
+      var className = this.props.className
+      if (this.getActiveState()) {
+        className += ' ' + this.props.activeClassName
       }
-      if (this.isActive(to, params, query)) {
-        classNames.push(activeClassName)
-      }
-      return classNames.join(' ')
+      return className
     },
 
     render() {
       var props = assign({}, this.props, {
-        active: this.isActive(this.props.to, this.props.params, this.props.query)
-      , className: this.getClassName()
+        active: this.getActiveState(),
+        className: this.getClassName()
       })
+      if (props.activeStyle && props.active) {
+        props.style = props.activeStyle
+      }
       if (this.props.link) {
-        // Only put classNames on the container
+        // Only use active styles on the container
         var linkProps = assign({}, this.props, {
-          className: ''
-        , activeClassName: ''
+          className: this.props.linkClassName,
+          activeClassName: '',
+          activeStyle: null
         })
-        return React.createElement(component, props,
+        return React.createElement(Component, props,
           React.createElement(Link, linkProps, this.props.children)
         )
       }
       else {
-        return React.createElement(component, props, this.props.children)
+        return React.createElement(Component, props, this.props.children)
       }
     }
   })

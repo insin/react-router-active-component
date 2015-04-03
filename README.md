@@ -97,6 +97,8 @@ passed to it when rendering:
 * `active`: `Boolean` - `true` if the specified route is active, `false` otherwise.
 * `className`: `String` - contains any `className` passed to the component plus
   its `activeClassName`, if active.
+* `style`: `Object` - the `activeStyle` object passed to the component, if
+  active.
 
 ### `options`: `Object`
 
@@ -110,6 +112,10 @@ Otherwise, its `children` will just be wrapped in the specified `component`.
 ```javascript
 var ActiveParagraph = createActiveRouteComponent('p', {link: false})
 ```
+
+#### `linkClassName` : `String` (default: `''`)
+
+A `className` for the nested `<Link/>`.
 
 ### Component Props
 
