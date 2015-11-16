@@ -37,6 +37,7 @@ function createActiveRouteComponent(Component, options) {
       activeStyle: PropTypes.object,
       link: PropTypes.bool,
       linkClassName: PropTypes.string,
+      onlyActiveOnIndex: PropTypes.bool,
       onClick: PropTypes.func,
       params: PropTypes.object,
       query: PropTypes.object
@@ -47,12 +48,13 @@ function createActiveRouteComponent(Component, options) {
         activeClassName: 'active',
         className: '',
         link: options.link,
-        linkClassName: options.linkClassName
+        linkClassName: options.linkClassName,
+        onlyActiveOnIndex: false,
       }
     },
 
     getActiveState:function() {
-      return this.context.history.isActive(this.props.to, this.props.params, this.props.query)
+      return this.context.history.isActive(this.props.to, this.props.query, this.props.onlyActiveOnIndex)
     },
 
     getClassName:function() {

@@ -132,6 +132,8 @@ These are:
 * `activeClassName` - the class name to be used when the component is active.
 * `activeStyle` - an inline style object to be used when the component is active.
 * `onClick` - a custom handler for the Link's click event.
+* `onlyActiveOnIndex` - should this link only be active on index routes
+    (see [IndexLink](https://github.com/rackt/react-router/blob/v1.0.0/docs/guides/basics/IndexRoutes.md#index-links))
 
 See the [Link docs](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
 for more details.
