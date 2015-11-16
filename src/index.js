@@ -18,7 +18,8 @@ function createActiveRouteComponent(Component, options) {
 
   return React.createClass({
     contextTypes: {
-      router: PropTypes.func.isRequired
+      location: React.PropTypes.object,
+      history: React.PropTypes.object
     },
 
     propTypes: {
@@ -46,7 +47,7 @@ function createActiveRouteComponent(Component, options) {
     },
 
     getActiveState() {
-      return this.context.router.isActive(this.props.to, this.props.params, this.props.query)
+      return this.context.history.isActive(this.props.to, this.props.params, this.props.query)
     },
 
     getClassName() {
