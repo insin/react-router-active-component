@@ -5,9 +5,9 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.createActiveRouteComponent = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null)
+var React = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null)
 var assign = require('react/lib/Object.assign')
-var $__0=  (typeof window !== "undefined" ? window.ReactRouter : typeof global !== "undefined" ? global.ReactRouter : null),Link=$__0.Link
+var $__0=  (typeof window !== "undefined" ? window['ReactRouter'] : typeof global !== "undefined" ? global['ReactRouter'] : null),Link=$__0.Link
 
 var PropTypes = React.PropTypes
 
@@ -23,7 +23,8 @@ function createActiveRouteComponent(Component, options) {
 
   return React.createClass({
     contextTypes: {
-      router: PropTypes.func.isRequired
+      location: React.PropTypes.object,
+      history: React.PropTypes.object
     },
 
     propTypes: {
@@ -36,6 +37,7 @@ function createActiveRouteComponent(Component, options) {
       activeStyle: PropTypes.object,
       link: PropTypes.bool,
       linkClassName: PropTypes.string,
+      onlyActiveOnIndex: PropTypes.bool,
       onClick: PropTypes.func,
       params: PropTypes.object,
       query: PropTypes.object
@@ -46,12 +48,13 @@ function createActiveRouteComponent(Component, options) {
         activeClassName: 'active',
         className: '',
         link: options.link,
-        linkClassName: options.linkClassName
+        linkClassName: options.linkClassName,
+        onlyActiveOnIndex: false,
       }
     },
 
     getActiveState:function() {
-      return this.context.router.isActive(this.props.to, this.props.params, this.props.query)
+      return this.context.history.isActive(this.props.to, this.props.query, this.props.onlyActiveOnIndex)
     },
 
     getClassName:function() {
@@ -137,6 +140,5 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-
 },{}]},{},[1])(1)
 });
