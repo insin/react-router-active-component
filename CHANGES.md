@@ -1,4 +1,5 @@
-Updated to React 0.14 and React Router 1.0.
+## 3.0.0 / 2015-12-30
+
 Updated to React 0.14 and React Router 1.0.3.
 
 Changed global variable exported from the UMD build from `createActiveComponent` to `reactRouterActiveComponent`

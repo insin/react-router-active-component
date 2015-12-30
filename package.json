@@ -1,6 +1,6 @@
 {
   "name": "react-router-active-component",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Factory function for React components which are active for a particular react-router route",
   "main": "lib/index.js",
   "jsnext:main": "es6/index.js",
