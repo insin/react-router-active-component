@@ -1,13 +1,8 @@
 # React Router Active Component
 
-A factory function for creating [React](http://facebook.github.io/react)
-components which get a special `className` when a specified
-[React Router](https://github.com/rackt/react-router) route is active, and can
-also handle creating a link to the route.
+A factory function for creating [React](http://facebook.github.io/react) components which get a special `className` when a specified [React Router](https://github.com/rackt/react-router) route is active, and can also handle creating a link to the route.
 
-The primary use case for this module is making it convenient to create
-components which contain a link to a route but put the active class name on the
-container rather than the link:
+The primary use case for this module is making it convenient to create components which contain a link to a route but put the active class name on the container rather than the link:
 
 **Using React Router's `Link` component:**
 
@@ -18,10 +13,10 @@ container rather than the link:
       Link Text                      Link Text
 ```
 
-**Using the `createActiveRouteComponent()` factory function:**
+**Using the `activeComponent()` factory function:**
 
-```javascript
-var NavLink = createActiveRouteComponent('li')
+```js
+var NavLink = activeComponent('li')
 ```
 ```html
 <ul>                           <ul>
@@ -37,15 +32,15 @@ The demo shows:
 * A `NavLink` component which creates a navigation `<li>` (including its `<a>`)
   which gets an `"active"` class, as required by Bootstrap's CSS.
 
-  ```javascript
-  var NavLink = createActiveRouteComponent('li')
+  ```js
+  var NavLink = activeComponent('li')
   ```
 
 * An `ActivePara` component which creates a `<p>` which only gets a `"special"`
   class for a specific route.
 
-  ```javascript
-  var ActivePara = createActiveRouteComponent('p', {link: false})
+  ```js
+  var ActivePara = activeComponent('p', {link: false})
   ```
   ```html
   <ActivePara to="routename" activeClassName="special">...</ActivePara>
@@ -53,54 +48,41 @@ The demo shows:
 
 ## Install
 
-**Node**
-
-`createActiveRouteComponent()` can be used on the server, or bundled for the
-client using an npm-compatible packaging system such as
-[Browserify](http://browserify.org/) or [webpack](http://webpack.github.io/).
-
 ````
 npm install react-router-active-component
 ```
+```
+var activeComponent = require('react-router-active-component')
+// or
+import activeComponent from 'react-router-active-component'
+```
 
-**Browser**
+Browser bundles are available, which export a global ``reactRouterActiveComponent`` variable and expect to find global ``React`` and ``ReactRouter`` variables to work with:
 
-The browser bundle exports a global ``createActiveRouteComponent`` variable and
-expects to find global ``React`` and ``ReactRouter`` variables to work with.
-You can find it in the
-[/dist directory](https://github.com/insin/react-router-active-component/tree/master/dist).
+* [react-router-active-component.js](https://npmcdn.com/react-router-active-component/umd/react-router-active-component.js) (development version)
+* [react-router-active-component.min.js](https://npmcdn.com/react-router-active-component/umd/react-router-active-component.min.js) (compressed production version)
 
 ## API
 
-## `createActiveRouteComponent(component[, options])`
+## `activeComponent(component[, options])`
 
-Creates a `ReactComponent` which takes the same props as React Router's
-[Link](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
-component to configure when it is considered active and which class it will
-be given when active.
+Creates a `ReactComponent` which takes the same props as React Router's [Link](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md) component to configure when it is considered active and which class it will be given when active.
 
-The component's contents will be wrapped in the given tag name or component - by
-default, its children will be used as contents for a `<Link/>`.
+The component's contents will be wrapped in the given tag name or component - by default, its children will be used as contents for a `<Link/>`.
 
-### `component`: `String`|`ReactComponent`
+### `component`: `String` | `ReactComponent`
 
-This can be anything that can be passed as the first argument to
-[`React.createElement()`](http://facebook.github.io/react/docs/top-level-api.html#react.createelement) -
-a tag name or a `ReactComponent` which will be used to wrap the component's
-children.
+This can be anything that can be passed as the first argument to [`React.createElement()`](http://facebook.github.io/react/docs/top-level-api.html#react.createelement) - a tag name string or a `ReactComponent` which will be used to wrap the component's children.
 
-```javascript
-var NavItem = createActiveRouteComponent('li')
+```js
+var NavItem = activeComponent('li')
 ```
 
-If a custom React component is given, the following additional props will be
-passed to it when rendering:
+If a custom React component is given, the following additional props will be passed to it when rendering:
 
 * `active`: `Boolean` - `true` if the specified route is active, `false` otherwise.
-* `className`: `String` - contains any `className` passed to the component plus
-  its `activeClassName`, if active.
-* `style`: `Object` - the `activeStyle` object passed to the component, if
-  active.
+* `className`: `String` - contains any `className` passed to the component plus its `activeClassName`, if active.
+* `style`: `Object` - the `activeStyle` object passed to the component, if active.
 
 ### `options`: `Object`
 
@@ -108,11 +90,10 @@ An options object with the following properties:
 
 #### `link`: `Boolean` (default: `true`)
 
-If `true`, the component's `props` and `children` be used to create a `<Link/>`.
-Otherwise, its `children` will just be wrapped in the specified `component`.
+If `true`, the component's `props` and `children` be used to create a `<Link/>`. Otherwise, its `children` will just be wrapped in the specified `component`.
 
-```javascript
-var ActiveParagraph = createActiveRouteComponent('p', {link: false})
+```js
+var ActiveParagraph = activeComponent('p', {link: false})
 ```
 
 #### `linkClassName` : `String` (default: `''`)
@@ -121,21 +102,8 @@ A `className` for the nested `<Link/>`.
 
 ### Component Props
 
-The component created by `createActiveRouteComponent()` takes the same props as
-React Router's `Link` component.
+The component created by `activeComponent()` takes the same props as React Router's `Link` component.
 
-These are:
-
-* `to` - a route name.
-* `params` - optional URL parameter object.
-* `query` - optional query parameters object.
-* `activeClassName` - the class name to be used when the component is active.
-* `activeStyle` - an inline style object to be used when the component is active.
-* `onClick` - a custom handler for the Link's click event.
-* `onlyActiveOnIndex` - should this link only be active on index routes
-    (see [IndexLink](https://github.com/rackt/react-router/blob/v1.0.0/docs/guides/basics/IndexRoutes.md#index-links))
-
-See the [Link docs](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md)
-for more details.
+See the [Link API docs](https://github.com/rackt/react-router/blob/v1.0.3/docs/API.md#link) for details.
 
 ### MIT Licensed

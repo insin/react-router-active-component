@@ -1,27 +1,33 @@
-void function() { 'use strict'
+require('bootstrap/dist/css/bootstrap.min.css')
+require('bootstrap/dist/css/bootstrap-theme.min.css')
+require('./style.css')
 
-var {DefaultRoute, Route, RouteHandler} = ReactRouter
+import React from 'react'
+import {render} from 'react-dom'
+import {IndexRoute, Route, Router} from 'react-router'
 
-var NavItem = createActiveRouteComponent('li')
+import activeComponent from '../../src'
 
-var ActivePara = createActiveRouteComponent('p', {link: false})
+let NavItem = activeComponent('li')
 
-var App = React.createClass({
+let ActivePara = activeComponent('p', {link: false})
+
+let App = React.createClass({
   render() {
     return <div className="App container">
       <nav className="navbar navbar-default" role="navigation">
         <div className="container">
           <span className="navbar-brand">Example App</span>
           <ul className="nav navbar-nav">
-            <NavItem to="dashboard">Dashboard</NavItem>
-            <NavItem to="tasks">Tasks</NavItem>
+            <NavItem to="/" onlyActiveOnIndex>Dashboard</NavItem>
+            <NavItem to="/tasks">Tasks</NavItem>
             <li>
               <p className="navbar-text"><code>&lt;li&gt;</code>s in this navbar get the <code>active</code>class</p>
             </li>
           </ul>
         </div>
       </nav>
-      <RouteHandler/>
+      {this.props.children}
       <hr/>
       <footer>
         <a href="https://github.com/insin/react-router-active-component">Fork me on GitHub</a>
@@ -30,41 +36,41 @@ var App = React.createClass({
   }
 })
 
-var Dashboard = React.createClass({
+let Dashboard = React.createClass({
   render() {
     return <div className="Dashboard">
       <h2>Dashboard</h2>
       <p>I'm a regular paragraph.</p>
-      <ActivePara to="dashboard" activeClassName="special">
+      <ActivePara to="/" activeClassName="special" onlyActiveOnIndex>
         I get highlighted because the Dashboard route is active.
       </ActivePara>
     </div>
   }
 })
 
-var Tasks = React.createClass({
+let Tasks = React.createClass({
   render() {
     return <div className="Tasks row">
       <div className="col-md-3">
         <ul className="nav nav-pills nav-stacked">
-          <NavItem to="all-tasks">All Tasks</NavItem>
-          <NavItem to="my-tasks">My Tasks</NavItem>
+          <NavItem to="/tasks/all">All Tasks</NavItem>
+          <NavItem to="/tasks/my">My Tasks</NavItem>
           <li>
             <p className="navbar-text"><code>&lt;li&gt;</code>s in this nav get the <code>active</code> class</p>
           </li>
         </ul>
       </div>
       <div className="col-md-9">
-        <ActivePara to="my-tasks" activeClassName="special">
+        <ActivePara to="/tasks/my" activeClassName="special">
           I get highlighted when the My Tasks route is active.
         </ActivePara>
-        <RouteHandler/>
+        {this.props.children}
       </div>
     </div>
   }
 })
 
-var TasksDashboard = React.createClass({
+let TasksDashboard = React.createClass({
   render() {
     return <div className="TasksDashboard">
       <h2>Tasks Dashboard</h2>
@@ -72,7 +78,7 @@ var TasksDashboard = React.createClass({
   }
 })
 
-var AllTasks = React.createClass({
+let AllTasks = React.createClass({
   render() {
     return <div className="AllTasks">
       <h2>All Tasks</h2>
@@ -80,7 +86,7 @@ var AllTasks = React.createClass({
   }
 })
 
-var MyTasks = React.createClass({
+let MyTasks = React.createClass({
   render() {
     return <div className="MyTasks">
       <h2>My Tasks</h2>
@@ -88,17 +94,13 @@ var MyTasks = React.createClass({
   }
 })
 
-var routes = <Route handler={App}>
-  <DefaultRoute name="dashboard" handler={Dashboard}/>
-  <Route name="tasks" handler={Tasks}>
-    <DefaultRoute handler={TasksDashboard}/>
-    <Route name="all-tasks" path="all" handler={AllTasks}/>
-    <Route name="my-tasks" path="my" handler={MyTasks}/>
+let routes = <Route path="/" component={App}>
+  <IndexRoute component={Dashboard}/>
+  <Route path="tasks" component={Tasks}>
+    <IndexRoute component={TasksDashboard}/>
+    <Route path="all" component={AllTasks}/>
+    <Route path="my" component={MyTasks}/>
   </Route>
 </Route>
 
-ReactRouter.run(routes, function(Handler) {
-  React.render(<Handler/>, document.body)
-})
-
-}()
+render(<Router routes={routes}/>, document.querySelector('#demo'))

@@ -1,49 +1,50 @@
 {
   "name": "react-router-active-component",
-  "description": "Factory function for React components which are active for a particular react-router route",
   "version": "2.0.0",
-  "main": "./lib/index.js",
-  "standalone": "createActiveRouteComponent",
-  "homepage": "https://github.com/insin/react-router-active-component",
-  "license": "MIT",
-  "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
-  "keywords": [
-    "react",
-    "react-router",
-    "active"
+  "description": "Factory function for React components which are active for a particular react-router route",
+  "main": "lib/index.js",
+  "jsnext:main": "es6/index.js",
+  "files": [
+    "es6",
+    "lib",
+    "umd"
   ],
+  "scripts": {
+    "build": "npm run lint && nwb build",
+    "lint": "eslint src tests demo/src",
+    "start": "nwb serve",
+    "test": "npm run build && nwb test",
+    "test:watch": "nwb test --server"
+  },
   "dependencies": {},
   "peerDependencies": {
-    "react": ">=0.13.0",
-    "react-router": ">=0.13.0"
+    "react": ">=0.14.0",
+    "react-router": "1.0.x"
   },
   "devDependencies": {
-    "browserify": "^9.0.6",
-    "browserify-shim": "^3.8.3",
-    "del": "^1.1.1",
-    "gulp": "^3.8.11",
-    "gulp-header": "^1.2.2",
-    "gulp-jshint": "^1.10.0",
-    "gulp-plumber": "^1.0.0",
-    "gulp-react": "^3.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-streamify": "0.0.5",
-    "gulp-uglify": "^1.1.0",
-    "gulp-util": "^3.0.4",
-    "jshint-stylish": "^1.0.1",
-    "vinyl-source-stream": "^1.1.0"
+    "eslint-config-jonnybuchanan": "2.0.x",
+    "nwb": "0.6.x",
+
+    "history": "1.17.0",
+    "react": "0.14.3",
+    "react-addons-test-utils": "0.14.3",
+    "react-router": "1.0.3",
+
+    "bootstrap": "3.3.6",
+    "react-dom": "0.14.3"
   },
-  "scripts": {
-    "debug": "gulp --debug",
-    "dist": "gulp bundle-js --production",
-    "watch": "gulp"
-  },
-  "browserify-shim": {
-    "react": "global:React",
-    "react-router": "global:ReactRouter"
-  },
+  "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
+  "homepage": "https://github.com/insin/react-router-active-component",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "http://github.com/insin/react-router-active-component.git"
-  }
+  },
+  "keywords": [
+    "react",
+    "react-router",
+    "active",
+    "component",
+    "react-higher-order-component"
+  ]
 }

@@ -1,0 +1,10 @@
+footer {
+  text-align: center;
+}
+/* Making sure that links don't get the active className. */
+a.active {
+  background-color: #f00;
+}
+p.special {
+  background-color: #ffc;
+}
