@@ -11,10 +11,11 @@ The primary use case for this module is making it convenient to create component
 **Using React Router's `Link` component:**
 
 ```html
-<ul>                           <ul>
-  <li>                   =>      <li>
-    <Link to="route">              <a href="/route" class="active">
-      Link Text                      Link Text
+<ul>                                      <ul>
+  <li>                                      <li>
+    <Link to="/route"                 =>      <a href="/route" class="active">
+          activeClassName="active">             Link Text
+      Link Text
 ```
 
 **Using the `activeComponent()` factory function:**
@@ -24,7 +25,7 @@ var NavLink = activeComponent('li')
 ```
 ```html
 <ul>                           <ul>
-  <NavLink to="route">   =>      <li class="active">
+  <NavLink to="/route">   =>     <li class="active">
     Link Text                      <a href="/route">
                                      Link Text
 ```
