@@ -1,8 +1,8 @@
 import expect from 'expect'
-import createHistory from 'history/lib/createMemoryHistory'
 import React from 'react'
 import {render, unmountComponentAtNode} from 'react-dom'
 import {Route, Router} from 'react-router'
+import createHistory from 'react-router/lib/createMemoryHistory'
 
 import activeComponent from 'src/index'
 

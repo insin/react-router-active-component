@@ -1,6 +1,17 @@
 import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
 
+let {toString} = Object.prototype
+
+let typeOf = o => toString.call(o).slice(8, -1).toLowerCase()
+
+function createLocationDescriptor({to, query, hash, state}) {
+  if (typeOf(to) === 'string') {
+    return {pathname: to, query, hash, state}
+  }
+  return {query, hash, state, ...to}
+}
+
 module.exports = function activeComponent(Component, options) {
   if (!Component) {
     throw new Error('activeComponent() must be given a tag name or React component')
@@ -14,17 +25,18 @@ module.exports = function activeComponent(Component, options) {
 
   return React.createClass({
     contextTypes: {
-      history: PropTypes.object
+      router: PropTypes.object
     },
 
     propTypes: {
       activeClassName: PropTypes.string.isRequired,
-      to: PropTypes.string.isRequired,
+      to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 
       activeStyle: PropTypes.object,
       className: PropTypes.string,
+      hash: PropTypes.string,
       link: PropTypes.bool,
-      linkClassName: PropTypes.string,
+      linkProps: PropTypes.object,
       onlyActiveOnIndex: PropTypes.bool,
       query: PropTypes.object
     },
@@ -33,42 +45,39 @@ module.exports = function activeComponent(Component, options) {
       return {
         activeClassName: 'active',
         link: options.link,
-        linkClassName: options.linkClassName,
         onlyActiveOnIndex: false
       }
     },
 
     render() {
       let {
-        link, linkClassName,
-        to, query, onlyActiveOnIndex, hash, state,
+        link, linkProps,
+        to, query, hash, state, onlyActiveOnIndex,
         activeClassName, activeStyle,
         ...props
       } = this.props
+      let location = createLocationDescriptor({to, query, hash, state})
+      let {router} = this.context
 
-      props.active = this.context.history.isActive(to, query, onlyActiveOnIndex)
-      if (props.active) {
-        if (activeClassName) {
-          props.className = `${props.className || ''}${props.className ? ' ' : ''}${activeClassName}`
-        }
-        if (activeStyle) {
-          props.style = {...props.style, activeStyle}
+      if (router) {
+        props.active = this.context.router.isActive(location, onlyActiveOnIndex)
+        if (props.active) {
+          if (activeClassName) {
+            props.className = `${props.className || ''}${props.className ? ' ' : ''}${activeClassName}`
+          }
+          if (activeStyle) {
+            props.style = {...props.style, activeStyle}
+          }
         }
       }
 
       if (!link) {
         return <Component {...props}>{this.props.children}</Component>
       }
-
-      // Only use active styles on the container
-      let linkProps = {
-        to, query, hash, state, onlyActiveOnIndex,
-        activeClassName: null,
-        activeStyle: null,
-        className: linkClassName
-      }
       return <Component {...props}>
-        <Link {...linkProps}>{this.props.children}</Link>
+        <Link className={options.linkClassName} {...linkProps} to={location}>
+          {this.props.children}
+        </Link>
       </Component>
     }
   })

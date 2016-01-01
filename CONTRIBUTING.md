@@ -1,4 +1,4 @@
-This project uses [nwb](https://github.com/insin/nwb) for building and running tests, with common development commands configured as npm run scripts.
+This project uses [nwb](https://github.com/insin/nwb) for building and running tests, with common development commands configured as npm run scripts. If you have nwb installed globally, you can use it directly insted of the npm run scripts below.
 
 ## Developing
 

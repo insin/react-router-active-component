@@ -19,19 +19,18 @@
   "dependencies": {},
   "peerDependencies": {
     "react": ">=0.14.0",
-    "react-router": "1.0.x"
+    "react-router": ">=2.0.0-rc4 < 3"
   },
   "devDependencies": {
     "eslint-config-jonnybuchanan": "2.0.x",
     "nwb": "0.6.x",
 
-    "history": "1.17.0",
-    "react": "0.14.3",
-    "react-addons-test-utils": "0.14.3",
-    "react-router": "1.0.3",
+    "react": "0.14.x",
+    "react-addons-test-utils": "0.14.x",
+    "react-dom": "0.14.x",
+    "react-router": "2.0.0-rc4",
 
-    "bootstrap": "3.3.6",
-    "react-dom": "0.14.3"
+    "bootstrap": "3.3.6"
   },
   "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
   "homepage": "https://github.com/insin/react-router-active-component",

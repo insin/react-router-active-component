@@ -53,7 +53,11 @@ The demo shows:
 ### Install
 
 ````
+# For React Router 1.x
 npm install react-router-active-component
+
+# For React Router 2.x
+npm install react-router-active-component@next
 ```
 ```
 var activeComponent = require('react-router-active-component')
@@ -100,15 +104,36 @@ If `true`, the component's `props` and `children` be used to create a `<Link/>`.
 var ActiveParagraph = activeComponent('p', {link: false})
 ```
 
-###### `linkClassName` : `String` (default: `''`)
+###### `linkClassName` : `String`
 
-A `className` for the nested `<Link/>`.
+A default `className` for the nested `<Link/>`.
 
 #### Component Props
 
-The component created by `activeComponent()` takes the same props as React Router's `Link` component.
+The component created by `activeComponent()` takes the same props as React Router's `Link` component. See the React Router [1.x Link API](https://github.com/rackt/react-router/blob/v1.0.3/docs/API.md#link) or [2.x Link API](https://github.com/rackt/react-router/blob/v2.0.0-rc4/docs/API.md#link) docs for details.
 
-See the [Link API docs](https://github.com/rackt/react-router/blob/v1.0.3/docs/API.md#link) for details.
+One difference is that `activeClassName` will default to `active` if not provided, since determining if a component is active is the whole point of using `activeComponent()`!
+
+Use the `onlyActiveOnIndex` boolean prop to control when a component is considered active when its URL path matches part of a deeper path - for example, if you have a "Home" navigation link which you only want to display as active when the current path is `'/'`, you should use this prop:
+
+```js
+<NavLink to="/" onlyActiveOnIndex>Home</NavLink>
+<NavLink to="/tasks">Tasks</NavLink>
+```
+
+**v4.x only:** pass a `linkProps` object to provide additional props when rendering a nested `<Link/>`:
+
+```js
+<NavLink to="/special" linkProps={{className: 'special', onClick: this.handleSpecial}}>
+  Special Link
+</NavLink>
+```
+
+**v3.x only:** pass a `linkClassName` string to provide a custom `className` when rendering a nested `<Link/>`:
+
+```js
+<NavLink to="/special" linkClassName="special">Special Link</NavLink>
+```
 
 ### MIT Licensed
 

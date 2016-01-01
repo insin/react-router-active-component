@@ -4,7 +4,7 @@ require('./style.css')
 
 import React from 'react'
 import {render} from 'react-dom'
-import {IndexRoute, Route, Router} from 'react-router'
+import {IndexRoute, Route, Router, hashHistory} from 'react-router'
 
 import activeComponent from '../../src'
 
@@ -103,4 +103,4 @@ let routes = <Route path="/" component={App}>
   </Route>
 </Route>
 
-render(<Router routes={routes}/>, document.querySelector('#demo'))
+render(<Router history={hashHistory} routes={routes}/>, document.querySelector('#demo'))

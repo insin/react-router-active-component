@@ -1,6 +1,10 @@
+Updated for React Router 2.x.
+
+Replaced `linkClassName` prop with a `linkProps` object, to provide any number of additional props when rendering a `<Link/>`.
+
 ## 3.0.0 / 2015-12-30
 
-Updated to React 0.14 and React Router 1.0.3.
+Updated to React 0.14 and for React Router 1.x.
 
 Changed global variable exported from the UMD build from `createActiveComponent` to `reactRouterActiveComponent`
 
@@ -12,7 +16,7 @@ Added an `onlyActiveOnIndex` prop to match `<Link>`'s' API [adamcharnock][adamch
 
 ## 2.0.0 / 2015-04-03
 
-Updated to React 0.13 and React Router 0.13.
+Updated to React 0.13 and for React Router 0.13.
 
 Added an `activeStyle` prop for the created component, as per `<Link>` in
 React Router 0.13.
