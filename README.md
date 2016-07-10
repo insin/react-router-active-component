@@ -102,7 +102,7 @@ A default `className` for the nested `<Link/>`.
 
 #### Component Props
 
-The component created by `activeComponent()` takes the same props as React Router's `Link` component. See the React Router [1.x Link API](https://github.com/rackt/react-router/blob/v1.0.3/docs/API.md#link) or [2.x Link API](https://github.com/rackt/react-router/blob/v2.0.0-rc4/docs/API.md#link) docs for details.
+The component created by `activeComponent()` takes the same props as React Router's `Link` component. See the React Router [Link API](https://github.com/reactjs/react-router/blob/master/docs/API.md#link) docs for details.
 
 One difference is that `activeClassName` will default to `active` if not provided, since determining if a component is active is the whole point of using `activeComponent()`!
 
