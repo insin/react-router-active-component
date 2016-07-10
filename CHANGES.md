@@ -1,3 +1,5 @@
+## 4.0.0 / 2016-07-11
+
 Updated for React Router 2.x.
 
 Replaced `linkClassName` prop with a `linkProps` object, to provide any number of additional props when rendering a `<Link/>`.
