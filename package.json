@@ -6,8 +6,7 @@
   "jsnext:main": "es6/index.js",
   "files": [
     "es6",
-    "lib",
-    "umd"
+    "lib"
   ],
   "scripts": {
     "build": "npm run lint && nwb build",
@@ -19,16 +18,16 @@
   "dependencies": {},
   "peerDependencies": {
     "react": ">=0.14.0",
-    "react-router": ">=2.0.0-rc4 < 3"
+    "react-router": "2.x"
   },
   "devDependencies": {
-    "eslint-config-jonnybuchanan": "2.0.x",
-    "nwb": "0.6.x",
+    "eslint-config-jonnybuchanan": "3.2.1",
+    "nwb": "0.11.0",
 
-    "react": "0.14.x",
-    "react-addons-test-utils": "0.14.x",
-    "react-dom": "0.14.x",
-    "react-router": "2.0.0-rc4",
+    "react": "15.2.1",
+    "react-addons-test-utils": "15.2.1",
+    "react-dom": "15.2.1",
+    "react-router": "2.5.2",
 
     "bootstrap": "3.3.6"
   },

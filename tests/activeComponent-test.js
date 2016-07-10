@@ -10,12 +10,21 @@ describe('activeComponent', () => {
   it('must be given a tag name or React component', () => {
     expect(activeComponent).toThrow()
   })
-  describe('main navigation link use case', () => {
+
+  context('main navigation link use case', () => {
     let NavLink = activeComponent('li')
+    let errorLogSpy
     let node
 
-    beforeEach(() => node = document.createElement('div'))
-    afterEach(() => unmountComponentAtNode(node))
+    beforeEach(() => {
+      errorLogSpy = expect.spyOn(console, 'error')
+      node = document.createElement('div')
+    })
+    afterEach(() => {
+      unmountComponentAtNode(node)
+      expect(errorLogSpy).toNotHaveBeenCalled()
+      errorLogSpy.restore()
+    })
 
     let App = (props) => <div>
       <nav>

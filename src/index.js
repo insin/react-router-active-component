@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react'
-import {Link} from 'react-router'
+import React, {PropTypes as t} from 'react'
+import Link from 'react-router/lib/Link'
+import withRouter from 'react-router/lib/withRouter'
 
 let {toString} = Object.prototype
 
@@ -20,32 +21,29 @@ module.exports = function activeComponent(Component, options) {
   options = {
     link: true,
     linkClassName: undefined,
-    ...options
+    ...options,
   }
 
-  return React.createClass({
-    contextTypes: {
-      router: PropTypes.object
-    },
-
+  let ActiveComponent = React.createClass({
     propTypes: {
-      activeClassName: PropTypes.string.isRequired,
-      to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+      activeClassName: t.string.isRequired,
+      router: t.object.isRequired,
+      to: t.oneOfType([t.string, t.object]).isRequired,
 
-      activeStyle: PropTypes.object,
-      className: PropTypes.string,
-      hash: PropTypes.string,
-      link: PropTypes.bool,
-      linkProps: PropTypes.object,
-      onlyActiveOnIndex: PropTypes.bool,
-      query: PropTypes.object
+      activeStyle: t.object,
+      className: t.string,
+      hash: t.string,
+      link: t.bool,
+      linkProps: t.object,
+      onlyActiveOnIndex: t.bool,
+      query: t.object,
     },
 
     getDefaultProps() {
       return {
         activeClassName: 'active',
         link: options.link,
-        onlyActiveOnIndex: false
+        onlyActiveOnIndex: false,
       }
     },
 
@@ -54,14 +52,18 @@ module.exports = function activeComponent(Component, options) {
         link, linkProps,
         to, query, hash, state, onlyActiveOnIndex,
         activeClassName, activeStyle,
-        ...props
+        router,
+        ...props,
       } = this.props
       let location = createLocationDescriptor({to, query, hash, state})
-      let {router} = this.context
 
       if (router) {
-        props.active = this.context.router.isActive(location, onlyActiveOnIndex)
-        if (props.active) {
+        let active = router.isActive(location, onlyActiveOnIndex)
+        if (typeOf(Component) !== 'string') {
+          props.active = active
+        }
+
+        if (active) {
           if (activeClassName) {
             props.className = `${props.className || ''}${props.className ? ' ' : ''}${activeClassName}`
           }
@@ -81,4 +83,6 @@ module.exports = function activeComponent(Component, options) {
       </Component>
     }
   })
+
+  return withRouter(ActiveComponent)
 }

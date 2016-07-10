@@ -54,28 +54,19 @@ The demo shows:
 ### Install
 
 ````
-# For React Router 1.x
 npm install react-router-active-component
-
-# For React Router 2.x
-npm install react-router-active-component@next
 ```
 ```
-var activeComponent = require('react-router-active-component')
-// or
 import activeComponent from 'react-router-active-component'
+// or
+var activeComponent = require('react-router-active-component')
 ```
-
-Browser bundles are available, which export a global `reactRouterActiveComponent` function and expect to find global `React` and `ReactRouter` variables to work with:
-
-* [react-router-active-component.js](https://npmcdn.com/react-router-active-component/umd/react-router-active-component.js) (development version)
-* [react-router-active-component.min.js](https://npmcdn.com/react-router-active-component/umd/react-router-active-component.min.js) (compressed production version)
 
 ### API
 
 #### `activeComponent(component[, options])`
 
-Creates a `ReactComponent` which takes the same props as React Router's [Link](https://github.com/rackt/react-router/blob/master/docs/api/components/Link.md) component to configure when it is considered active and which class it will be given when active.
+Creates a `ReactComponent` which takes the same props as React Router's [Link](https://github.com/reactjs/react-router/blob/master/docs/API.md#link) component to configure when it is considered active and which class it will be given when active.
 
 The component's contents will be wrapped in the given tag name or component - by default, its children will be used as contents for a `<Link/>`.
 
@@ -122,18 +113,12 @@ Use the `onlyActiveOnIndex` boolean prop to control when a component is consider
 <NavLink to="/tasks">Tasks</NavLink>
 ```
 
-**v4.x only:** pass a `linkProps` object to provide additional props when rendering a nested `<Link/>`:
+Pass a `linkProps` object to provide additional props when rendering a nested `<Link/>`:
 
 ```js
 <NavLink to="/special" linkProps={{className: 'special', onClick: this.handleSpecial}}>
   Special Link
 </NavLink>
-```
-
-**v3.x only:** pass a `linkClassName` string to provide a custom `className` when rendering a nested `<Link/>`:
-
-```js
-<NavLink to="/special" linkClassName="special">Special Link</NavLink>
 ```
 
 ### MIT Licensed

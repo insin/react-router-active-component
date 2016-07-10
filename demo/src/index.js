@@ -4,7 +4,10 @@ require('./style.css')
 
 import React from 'react'
 import {render} from 'react-dom'
-import {IndexRoute, Route, Router, hashHistory} from 'react-router'
+import hashHistory from 'react-router/lib/hashHistory'
+import IndexRoute from 'react-router/lib/IndexRoute'
+import Route from 'react-router/lib/Route'
+import Router from 'react-router/lib/Router'
 
 import activeComponent from '../../src'
 
