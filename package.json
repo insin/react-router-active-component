@@ -18,7 +18,7 @@
   "dependencies": {},
   "peerDependencies": {
     "react": ">=0.14.0",
-    "react-router": "2.x"
+    "react-router": "^2.4.0"
   },
   "devDependencies": {
     "eslint-config-jonnybuchanan": "3.2.1",
