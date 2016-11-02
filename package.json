@@ -18,7 +18,7 @@
   "dependencies": {},
   "peerDependencies": {
     "react": ">=0.14.0",
-    "react-router": "^2.4.0"
+    "react-router": "^3.0.0"
   },
   "devDependencies": {
     "eslint-config-jonnybuchanan": "3.2.1",
@@ -27,7 +27,7 @@
     "react": "15.2.1",
     "react-addons-test-utils": "15.2.1",
     "react-dom": "15.2.1",
-    "react-router": "2.5.2",
+    "react-router": "3.0.0",
 
     "bootstrap": "3.3.6"
   },

@@ -13,6 +13,20 @@ function createLocationDescriptor({to, query, hash, state}) {
   return {query, hash, state, ...to}
 }
 
+function omitProps(props, omittedPropNames) {
+  const isOmittedProp = {}
+  omittedPropNames.forEach(propName => { isOmittedProp[propName] = true })
+
+  const elementProps = {}
+  Object.entries(props).forEach(([propName, propValue]) => {
+    if (!isOmittedProp[propName]) {
+      elementProps[propName] = propValue
+    }
+  })
+
+  return elementProps
+}
+
 module.exports = function activeComponent(Component, options) {
   if (!Component) {
     throw new Error('activeComponent() must be given a tag name or React component')
@@ -73,10 +87,12 @@ module.exports = function activeComponent(Component, options) {
         }
       }
 
+      let componentProps = omitProps(props, ['params', 'location', 'routes'])
+
       if (!link) {
-        return <Component {...props}>{this.props.children}</Component>
+        return <Component {...componentProps}>{this.props.children}</Component>
       }
-      return <Component {...props}>
+      return <Component {...componentProps}>
         <Link className={options.linkClassName} {...linkProps} to={location}>
           {this.props.children}
         </Link>
