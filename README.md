@@ -53,7 +53,7 @@ The demo shows:
 
 ### Install
 
-````
+```
 npm install react-router-active-component
 ```
 ```
