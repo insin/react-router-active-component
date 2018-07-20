@@ -1,4 +1,6 @@
-import React, {PropTypes as t} from 'react'
+import React from 'react'
+import t from 'prop-types'
+import createReactClass from 'create-react-class'
 import Link from 'react-router/lib/Link'
 import withRouter from 'react-router/lib/withRouter'
 
@@ -24,7 +26,7 @@ module.exports = function activeComponent(Component, options) {
     ...options,
   }
 
-  let ActiveComponent = React.createClass({
+  let ActiveComponent = createReactClass({
     propTypes: {
       activeClassName: t.string.isRequired,
       router: t.object.isRequired,
